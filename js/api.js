@@ -30,6 +30,10 @@ function setCanvaSize() {
     $(".thumbnail").css( "width", itemSize).css( "height", itemSize);
     $(".cover").css( "width", itemSize).css( "height", itemSize);
 
+    $("#loader").fadeOut("fast", function () {
+        $("#results").fadeIn("fast");
+    });
+
     console.log('New item size: '+itemSize+'px');
     console.log('New widow size: '+browser.width+'x'+browser.height+'px');
 };
