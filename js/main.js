@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-dzrRequest("http://api.deezer.com/user/34466551/albums?limit=200&index=500&output=jsonp");
+dzrRequest("http://api.deezer.com/user/34466551/albums?limit=1000&output=jsonp");
 
 window.onload = setCanvaSize;
 window.addEventListener('resize', setCanvaSize);
@@ -50,16 +50,12 @@ function dzrRequest(request){
         success : function(data) { 
             data.data.reverse(); // Get latest favourites first
 
-            var list = data.data;
-            keysSorted = Object.keys(list).sort(function(a,b){return list[b].time_add-list[a].time_add});
-            console.log(keysSorted);
-
-        	for (var i = 0; i < data.data.length; i++) {
+        	for (var i = 0; i < 50; i++) {
                 //content[i] = { image:data.data[i].cover_medium, album:data.data[i].title, artist:data.data[i].artist.name };
-                $("#results").append('<dl class="thumbnail"><dt><img class="cover" src="'+data.data[i].cover_medium+'" alt="" /></dt><dd>'+data.data[i].title+'</dd>');
+                $("#results").append('<div class="thumbnail"><img class="cover" src="'+data.data[i].cover_medium+'" alt="" /><ul><li class="title">'+data.data[i].title+'</li></ul>');
         	};
 
-            //console.log(content);
+            console.log('Results :'+data.data.length);
         	console.log(data.data); 
     	}
     });
