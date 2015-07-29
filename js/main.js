@@ -40,8 +40,6 @@ function setCanvaSize() {
 
 function dzrRequest(request){
 
-    //var content = [];
-
     $.ajax({
         dataType: "jsonp",
         url : request,
@@ -51,12 +49,19 @@ function dzrRequest(request){
             data.data.reverse(); // Get latest favourites first
 
         	for (var i = 0; i < 50; i++) {
-                //content[i] = { image:data.data[i].cover_medium, album:data.data[i].title, artist:data.data[i].artist.name };
-                $("#results").append('<div class="thumbnail"><img class="cover" src="'+data.data[i].cover_medium+'" alt="" /><ul><li class="title">'+data.data[i].title+'</li></ul>');
+                $("#results").append('<a href="'+data.data[i].link+'" target="_blank"><div class="thumbnail"><img class="cover" src="'+data.data[i].cover_medium+'" alt="" /><ul><li class="title">'+data.data[i].title+'</li></ul></div></a>');
         	};
 
             console.log('Results :'+data.data.length);
         	console.log(data.data); 
+
+            $(".thumbnail ul").hide();
+            $(".thumbnail").mouseover( function () {
+                console.log("plop");
+                $("ul", this).stop(true, true).toggle();
+            }).mouseout( function() {
+                $("ul", this).stop(true, true).toggle();
+            });
     	}
     });
 };
