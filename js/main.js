@@ -40,27 +40,41 @@ $( document ).ready(function() {
 
   function dzrRequest(request){
 
-      $.ajax({
-          dataType: "jsonp",
-          url : request,
-          data : {},
-          jsonp : 'callback',
-          success : function(data) {
-              data.data.reverse(); // Get latest favourites first
+    var albumId;
+    var playerStatus = 0;
 
-          	for (var i = 0; i < 50; i++) {
-                  $("#results").append('<div class="thumbnail" id="'+data.data[i].id+'"><img class="cover" src="'+data.data[i].cover_medium+'" alt="" /><ul><li class="title">'+data.data[i].title+'</li></ul></div>');
-          	};
+    $.ajax({
+        dataType: "jsonp",
+        url : request,
+        data : {},
+        jsonp : 'callback',
+        success : function(data) {
+            data.data.reverse(); // Get latest favourites first
 
-            //console.log('Results :'+data.data.length);
-          	//console.log(data.data);
+        	for (var i = 0; i < 50; i++) {
+                $("#results").append('<div class="thumbnail" id="'+data.data[i].id+'"><img class="cover" src="'+data.data[i].cover_medium+'" alt="" /><ul><li class="title">'+data.data[i].title+'</li></ul></div>');
+        	};
 
-            //$(".thumbnail ul").hide();
-            $(".thumbnail").click( function () {
+          //console.log('Results :'+data.data.length);
+        	//console.log(data.data);
+
+          //$(".thumbnail ul").hide();
+          $(".thumbnail").click( function () {
+            if (albumId === $(this).attr('id')) {
+              if (playerStatus === 0) {
+                DZ.player.play();
+                playerStatus = 1;
+              } else {
+                DZ.player.pause();
+                playerStatus = 0;
+              }
+            } else {
+              albumId = $(this).attr('id');
               DZ.player.playAlbum($(this).attr('id'));
-            });
-      	}
-      });
+            }
+          });
+    	}
+    });
   };
 
   // Soundcloud API
