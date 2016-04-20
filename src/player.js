@@ -4,7 +4,6 @@ DZ.init({
   player: {
 		onload: function(response) {
 			console.log('DZ.player is ready', response);
-      //DZ.player.playRadio(34466551, 'user');
 		}
 	}
 });
