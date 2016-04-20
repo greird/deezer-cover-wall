@@ -1,0 +1,27 @@
+{
+  "name": "deezer-cover-wall",
+  "version": "1.0.0",
+  "description": "A cover wall based on my own favorite albums from Deezer.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greird/deezer-cover-wall.git"
+  },
+  "author": "Hubert Fauconnier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/greird/deezer-cover-wall/issues"
+  },
+  "homepage": "https://github.com/greird/deezer-cover-wall#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3",
+    "jshint": "^2.9.2"
+  }
+}
