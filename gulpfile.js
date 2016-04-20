@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
     return gulp.src('src/*.js')
-        .pipe(gulp.dest('js'))
+        //.pipe(gulp.dest('js'))
         .pipe(rename({ suffix: '.min' }))
         .pipe(uglify({ preserveComments: "license" }))
         .pipe(gulp.dest('js'))

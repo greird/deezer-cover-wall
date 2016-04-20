@@ -15,13 +15,13 @@ $( document ).ready(function() {
       browser = {
           width: window.innerWidth || document.body.clientWidth,
           height: window.innerHeight || document.body.clientHeight
-      }
+      };
 
       // Calculate how many items can fit in the window's width and height
       itemNumber = {
           width: (Math.ceil(browser.width / itemSize)),
           height: (Math.ceil(browser.height / itemSize))
-      }
+      };
 
       // Re-set the item size to fit the page width
       itemSize = browser.width / itemNumber.width;
@@ -36,7 +36,7 @@ $( document ).ready(function() {
 
       //console.log('New item size: '+itemSize+'px');
       //console.log('New widow size: '+browser.width+'x'+browser.height+'px');
-  };
+  }
 
   function dzrRequest(request){
 
@@ -53,7 +53,7 @@ $( document ).ready(function() {
 
         	for (var i = 0; i < 50; i++) {
                 $("#results").append('<div class="thumbnail" id="'+data.data[i].id+'"><img class="cover" src="'+data.data[i].cover_medium+'" alt="" /><ul><li class="title">'+data.data[i].title+'</li></ul></div>');
-        	};
+        	}
 
           //console.log('Results :'+data.data.length);
         	//console.log(data.data);
@@ -75,7 +75,7 @@ $( document ).ready(function() {
           });
     	}
     });
-  };
+  }
 
   // Soundcloud API
   /*
