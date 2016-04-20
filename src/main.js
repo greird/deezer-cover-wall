@@ -2,8 +2,22 @@ $( document ).ready(function() {
 
   dzrRequest("http://api.deezer.com/user/34466551/albums?limit=1000&output=jsonp");
 
-  window.onload = setCanvaSize;
+  window.onload = function() {
+    setCanvaSize();
+
+    $(".title").hide();
+
+    $(".thumbnail").hover(function() {
+      $(".cover", this).fadeTo("fast" , 0.4);
+      $(".title", this).fadeIn("fast");
+    }, function() {
+      $(".cover", this).fadeTo("fast" , 1);
+      $(".title", this).fadeOut("fast");
+    });
+  };
   window.addEventListener('resize', setCanvaSize);
+
+
 
   function setCanvaSize() {
 
@@ -33,9 +47,6 @@ $( document ).ready(function() {
       $("#loader").fadeOut("fast", function () {
           $("#results").fadeIn("fast");
       });
-
-      //console.log('New item size: '+itemSize+'px');
-      //console.log('New widow size: '+browser.width+'x'+browser.height+'px');
   }
 
   function dzrRequest(request){
@@ -52,7 +63,8 @@ $( document ).ready(function() {
             data.data.reverse(); // Get latest favourites first
 
         	for (var i = 0; i < 50; i++) {
-                $("#results").append('<div class="thumbnail" id="'+data.data[i].id+'"><img class="cover" src="'+data.data[i].cover_medium+'" alt="" /><ul><li class="title">'+data.data[i].title+'</li></ul></div>');
+                $("#results").append(
+                  '<div class="thumbnail" id="'+data.data[i].id+'"><img class="cover" src="'+data.data[i].cover_medium+'" alt="" /><ul><li class="title">'+data.data[i].title+'</li></ul></div>');
         	}
 
           //console.log('Results :'+data.data.length);
