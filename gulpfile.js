@@ -11,7 +11,7 @@ gulp.task('scripts', function() {
         //.pipe(gulp.dest('js'))
         .pipe(rename({ suffix: '.min' }))
         .pipe(uglify({ preserveComments: "license" }))
-        .pipe(gulp.dest('js'))
+        .pipe(gulp.dest('src/min'))
 });
 
 // Lint Task
