@@ -1,13 +1,13 @@
 <thumbnail>
 
-  <div class="thumbnail" id="{ id }" each={ opts } onclick="play({ id }, 'track')" >
+  <div class="thumbnail" id="{ id }" each={ opts } >
     <div class="track-information">
-      <h1>{ title }</h1>
-      <h2><em>by</em> { artist.name}</h2>
+      <h1><a href="http://www.deezer.com/album/{ album.id }">{ title }</a></h1>
+      <h2><em>by</em> <a href="http://www.deezer.com/album/{ artist.id }">{ artist.name}</a></h2>
     </div>
     <!--<img class="btn-play" src="img/btn_play.svg" alt="Play" />-->
     <img class="cover" src="{ album.cover_medium }" alt="" />
-    <div class="overlay"></div>
+    <div class="overlay" onclick="play({ id }, 'track')"></div>
   </div>
 
   <script>
