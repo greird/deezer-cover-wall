@@ -1,6 +1,6 @@
 <thumbnail>
 
-  <div class="thumbnail" id="{ id }" each={ opts } onclick={ play } >
+  <div class="thumbnail" id="{ id }" each={ opts } onclick="play({ id }, 'track')" >
     <div class="track-information">
       <h1>{ title }</h1>
       <h2><em>by</em> { artist.name}</h2>
@@ -11,12 +11,6 @@
   </div>
 
   <script>
-
-    this.play = function (e) {
-        console.log(this.opts.id);
-        DZ.player.playTrack(this.opts.id);
-    }
-
     this.on("update", function() {
       console.log("thumbnail tag updated.");
     });
