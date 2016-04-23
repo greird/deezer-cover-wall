@@ -7,16 +7,16 @@ var gulp = require('gulp'),
 
 // Concatenate & Minify JS
 gulp.task('scripts', function() {
-    return gulp.src('src/*.js')
+    return gulp.src('js/*.js')
         //.pipe(gulp.dest('js'))
         .pipe(rename({ suffix: '.min' }))
         .pipe(uglify({ preserveComments: "license" }))
-        .pipe(gulp.dest('src/min'))
+        .pipe(gulp.dest('js/min'))
 });
 
 // Lint Task
 gulp.task('lint', function() {
-    return gulp.src('src/*.js')
+    return gulp.src('js/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
@@ -30,6 +30,6 @@ gulp.task('lint', function() {
 gulp.task('watch', function() {
 
   // Watch .js files
-  gulp.watch('src/*.js', ['lint', 'scripts']);
+  gulp.watch('js/*.js', ['lint', 'scripts']);
 
 });

@@ -16,4 +16,4 @@ DZ.init({
 });
 
 console.log("Initialized.");
-console.log("USER_ID:"+MY_USER_ID);
+console.log("USER_ID: "+MY_USER_ID);

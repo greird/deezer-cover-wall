@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="29px" height="28px" viewBox="0 0 29 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>btn play</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path id="path-1" d="M4.44274518,28.5723025 C1.98908477,29.834185 0,28.6131175 0,25.8651146 L0,4.99202827 C0,2.23500719 1.99161703,1.02426019 4.44274518,2.28484038 L25.5572548,13.1437311 C28.0109152,14.4056135 28.008383,16.4528316 25.5572548,17.7134118 L4.44274518,28.5723025 Z"></path>
+    </defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Desktop-HD" sketch:type="MSArtboardGroup" transform="translate(-823.000000, -347.000000)">
+            <g id="btn-play" sketch:type="MSLayerGroup" transform="translate(823.750000, 345.203846)">
+                <g id="btn-play-copy">
+                    <use fill="#FFFFFF" fill-rule="evenodd" sketch:type="MSShapeGroup" xlink:href="#path-1"></use>
+                    <use fill="none" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

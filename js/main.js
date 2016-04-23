@@ -5,15 +5,17 @@ $( document ).ready(function() {
   window.onload = function() {
     setCanvaSize();
 
-    $(".title").hide();
+    $(".track-information").hide();
+    $(".overlay").hide();
 
-    $(".thumbnail").hover(function() {
-      $(".cover", this).fadeTo("fast" , 0.4);
-      $(".title", this).fadeIn("fast");
-    }, function() {
-      $(".cover", this).fadeTo("fast" , 1);
-      $(".title", this).fadeOut("fast");
-    });
+    $(".thumbnail")
+      .hover(function() {
+        $(".overlay", this).fadeTo("fast" , 0.8);
+        $(".track-information", this).fadeIn("fast");
+      }, function() {
+        $(".overlay", this).stop().fadeOut("fast");
+        $(".track-information", this).stop().fadeOut("fast");
+   });
   };
   window.addEventListener('resize', setCanvaSize);
 
