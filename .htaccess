@@ -1,0 +1,4 @@
+Options +FollowSymlinks
+RewriteEngine On
+
+RewriteRule ^([a-z]+)/([0-9]+)$  index.html?type=$1&id=$2  [L]

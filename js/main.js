@@ -1,6 +1,24 @@
 $( document ).ready(function() {
 
-  dzrRequest("http://api.deezer.com/user/34466551/flow?limit=200&output=jsonp");
+  if (!isNaN(getQueryString("id"))) {
+    var id = getQueryString("id");
+    switch (getQueryString("type")) {
+      case "album":
+        dzrRequest("http://api.deezer.com/album/" + id + "/tracks?limit=200&output=jsonp");
+        break;
+      case "playlist":
+        dzrRequest("http://api.deezer.com/playlist/" + id + "/tracks?limit=200&output=jsonp");
+        break;
+      case "artist":
+        dzrRequest("http://api.deezer.com/artist/" + id + "/albums?limit=200&output=jsonp");
+        break;
+      case "user":
+        dzrRequest("http://api.deezer.com/user/" + id + "/flow?limit=200&output=jsonp");
+        break;
+      default:
+        dzrRequest("http://api.deezer.com/user/34466551/flow?limit=200&output=jsonp");
+    }
+  } else dzrRequest("http://api.deezer.com/user/34466551/flow?limit=200&output=jsonp");
 
   window.onload = function() {
     setCanvaSize();
@@ -64,5 +82,23 @@ $( document ).ready(function() {
           riot.mount('thumbnail', opts);
     	}
     });
+  }
+
+  /** Retun the value of a GET variable in the URL
+   * @param {String} key | Required | The name of the GET var to search for
+   * @param {String} default_ | Optional | The default value to return if no match
+   * @return {String}
+   * @author http://www.bloggingdeveloper.com/post/JavaScript-QueryString-ParseGet-QueryString-with-Client-Side-JavaScript.aspx
+  */
+  function getQueryString(key, default_)
+  {
+    if (default_==null) default_="";
+    key = key.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+    var regex = new RegExp("[\\?&]"+key+"=([^&#]*)");
+    var qs = regex.exec(window.location.href);
+    if(qs == null)
+      return default_;
+    else
+      return qs[1];
   }
 });
