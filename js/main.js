@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-  dzrRequest("http://api.deezer.com/user/34466551/albums?limit=1000&output=jsonp");
+  dzrRequest("http://api.deezer.com/user/34466551/flow&output=jsonp");
 
   window.onload = function() {
     setCanvaSize();
@@ -18,8 +18,6 @@ $( document ).ready(function() {
    });
   };
   window.addEventListener('resize', setCanvaSize);
-
-
 
   function setCanvaSize() {
 
@@ -52,9 +50,7 @@ $( document ).ready(function() {
   }
 
   function dzrRequest(request){
-
-    var albumId;
-    var playerStatus = 0;
+    var opts;
 
     $.ajax({
         dataType: "jsonp",
@@ -62,40 +58,9 @@ $( document ).ready(function() {
         data : {},
         jsonp : 'callback',
         success : function(data) {
-            data.data.reverse(); // Get latest favourites first
-
-        	for (var i = 0; i < 50; i++) {
-                $("#results").append(
-                  '<div class="thumbnail" id="'+data.data[i].id+'"><img class="cover" src="'+data.data[i].cover_medium+'" alt="" /><ul><li class="title">'+data.data[i].title+'</li></ul></div>');
-        	}
-
-          //console.log('Results :'+data.data.length);
-        	//console.log(data.data);
-
-          //$(".thumbnail ul").hide();
-          $(".thumbnail").click( function () {
-            if (albumId === $(this).attr('id')) {
-              if (playerStatus === 0) {
-                DZ.player.play();
-                playerStatus = 1;
-              } else {
-                DZ.player.pause();
-                playerStatus = 0;
-              }
-            } else {
-              albumId = $(this).attr('id');
-              DZ.player.playAlbum($(this).attr('id'));
-            }
-          });
+          opts = data.data.reverse(); // Get latest favourites first
+          riot.mount('thumbnail', opts);
     	}
     });
   }
-
-  // Soundcloud API
-  /*
-  $.get("http://api.soundcloud.com/playlists/405726.json?client_id=b11bdb8808fd0887155b4978f2ff269f", function(data) {
-  	console.log("data loaded" + data['kind']);
-  });
-  */
-
 });
