@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-  dzrRequest("http://api.deezer.com/user/34466551/flow&output=jsonp");
+  dzrRequest("http://api.deezer.com/user/34466551/flow?limit=200&output=jsonp");
 
   window.onload = function() {
     setCanvaSize();
@@ -43,6 +43,8 @@ $( document ).ready(function() {
       // Set thumbnail and cover (img) size
       $(".thumbnail").css( "width", itemSize).css( "height", itemSize);
       $(".cover").css( "width", itemSize).css( "height", itemSize);
+      $(".track-information").css( "width", itemSize-40);
+      $("#cover").css( "width", itemSize*itemNumber.width).css( "height", itemSize*itemNumber.height);
 
       $("#loader").fadeOut("fast", function () {
           $("#results").fadeIn("fast");
