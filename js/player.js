@@ -1,5 +1,7 @@
-var MY_USER_ID = "34466551";
-var PREV_TRACK;
+var MY_USER_ID = "34466551",
+  PLAYER = {
+    CURRENT_TRACK: {}
+  };
 
 // Initialize player
 DZ.init({
@@ -14,33 +16,34 @@ DZ.init({
 
 // Play any track, album or playlist
 function play(id, type) {
-  var currentTrack = DZ.player.getCurrentTrack();
+
+  var currentTrack;
+
   switch (type) {
     case "track":
+
       if (DZ.player.isPlaying()) {
+        currentTrack = DZ.player.getCurrentTrack();
         if (currentTrack.id == id) {
           DZ.player.pause();
           $("#player").slideUp("fast");
         } else {
           DZ.player.playTracks([id]);
-          PREV_TRACK = currentTrack.id;
         }
       } else {
-        if (PREV_TRACK == id) {
-          DZ.player.play();
-        } else {
-          DZ.player.playTracks([id]);
-          PREV_TRACK = id;
-        }
+        DZ.player.playTracks([id]);
         riot.mount('player');
       }
       break;
+
     case "album":
       DZ.player.playAlbum(id);
       break;
+
     case "playlist":
       DZ.player.playTracks(id);
       break;
+
     default:
       console.error("Invalid type or id.");
       console.log("Type: " + type);
@@ -48,3 +51,10 @@ function play(id, type) {
   }
 
 }
+
+// Update player data on status change
+DZ.Event.subscribe('current_track', function(track, evt_name){
+  PLAYER.CURRENT = track;
+  riot.update("player");
+	console.log("Currently playing: ", PLAYER.CURRENT.track);
+});

@@ -1,14 +1,15 @@
 <player>
-  <h3>Currently playing : { title }</h3>
+  <h3>
+    <i class="fa fa-play" aria-hidden="true"></i>
+    { PLAYER.CURRENT.track.title }
+    <em>by</em> { PLAYER.CURRENT.track.artist.name }
+  </h3>
 
   <script>
+    var title = "blu";
     this.on("mount", function() {
       $("#player").slideDown("fast");
     })
-
-    DZ.Event.subscribe('current_track', function(track, evt_name){
-      
-    });
 
     this.on("update", function() {
       console.log("player tag updated. Opts: ");
