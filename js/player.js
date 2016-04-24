@@ -64,6 +64,7 @@ function play(id, type) {
       } else {
         if (currentTrackId === id) {
           DZ.player.play();
+          $("#player").slideDown("fast");
         } else {
           DZ.player.playTracks([id]);
           riot.mount('player');
