@@ -4,16 +4,18 @@ DZ.init({
   channelUrl : 'http://localhost:8888/deezer-cover-wall/channel.html',
   player: {
 		onload: function(response) {
+
+      var id = parseInt(getQueryString("id")) || null;
+      var type = getQueryString("type") || null;
       var dzrRequest;
+
 			console.log('DZ.player is ready', response);
 
-      if (!isNaN(getQueryString("id"))) {
+      if (!isNaN(id) && type !== null) {
 
-        var id = getQueryString("id");
-
-        switch (getQueryString("type")) {
+        switch (type) {
           case "album":
-            dzrRequest = "/album/" + id + "/tracks?limit=" + ITEMS_LIMIT;
+            dzrRequest = "/album/" + id + "?limit=" + ITEMS_LIMIT;
             break;
           case "playlist":
             dzrRequest = "/playlist/" + id + "/tracks?limit=" + ITEMS_LIMIT;
@@ -32,12 +34,57 @@ DZ.init({
       }
 
       DZ.api(dzrRequest, function(response) {
-        var opts = response.data.reverse(); // Get latest tracks first
+        var i;
+        var y;
+        var albumsData = {};
+        var tracksData = {};
 
-        for (var i in opts) {
-          DZ.player.addToQueue([opts[i].id]);
+        switch (type) {
+
+          case "album":
+            tracksData = response.tracks.data;
+
+            for (i in tracksData) {
+              DZ.player.addToQueue([tracksData[i].id]);
+
+              tracksData[i].album = {};
+              tracksData[i].album.cover_medium = response.cover_medium;
+              tracksData[i].album.id = response.id;
+            }
+            break;
+
+          // NOTE: DOESN'T WORK.. :( Needs to be fixed !
+            case "artist":
+              albumsData = response.data;
+
+              for (i in albumsData) {
+
+                DZ.api('/album/'+albumsData[i].id, function(responseAlbum) { 
+                  tracksData = responseAlbum.tracks.data;
+
+                  for (y in tracksData) {
+
+                    DZ.player.addToQueue([tracksData[y].id]);
+
+                    albumsData[i].tracks = {};
+                    albumsData[i].tracks.data = tracksData[y];
+                  }
+                  riot.mount('thumbnail', albumsData);
+                  setCanvaSize();
+                  setAnimations();
+                });
+              }
+            break;
+
+          default:
+            tracksData = response.data.reverse(); // Get latest tracks first
+
+            for (i in tracksData) {
+              DZ.player.addToQueue([tracksData[i].id]);
+            }
         }
-        riot.mount('thumbnail', opts);
+
+        riot.mount('thumbnail', tracksData);
 
         setCanvaSize();
         setAnimations();
