@@ -1,3 +1,6 @@
+html, body {
+	overflow-y: hidden;
+}
 html, body, img, dl, dt, dd {
 	margin: 0;
 	padding: 0;
@@ -65,7 +68,7 @@ a:hover {
 }
 
 .overlay {
-	position: absolute;
+	position: relative;
 	height: 100%;
 	width: 100%;
 	background-color: #23232D;

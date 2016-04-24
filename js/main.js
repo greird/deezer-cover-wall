@@ -63,7 +63,6 @@ $( document ).ready(function() {
       $(".thumbnail").css( "width", itemSize).css( "height", itemSize);
       $(".cover").css( "width", itemSize).css( "height", itemSize);
       $(".track-information").css( "width", itemSize-40);
-      $("#cover").css( "width", itemSize*itemNumber.width).css( "height", itemSize*itemNumber.height);
 
       $("#loader").fadeOut("fast", function () {
           $("#results").fadeIn("fast");
