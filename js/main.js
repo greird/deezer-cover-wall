@@ -16,15 +16,16 @@ $( document ).ready(function() {
         dzrRequest("http://api.deezer.com/user/" + id + "/flow?limit=200&output=jsonp");
         break;
       default:
-        dzrRequest("http://api.deezer.com/user/34466551/flow?limit=200&output=jsonp");
+        dzrRequest("http://api.deezer.com/user/" + MY_USER_ID + "/flow?limit=200&output=jsonp");
     }
-  } else dzrRequest("http://api.deezer.com/user/34466551/flow?limit=200&output=jsonp");
+  } else dzrRequest("http://api.deezer.com/user/" + MY_USER_ID + "/flow?limit=200&output=jsonp");
 
   window.onload = function() {
     setCanvaSize();
 
     $(".track-information").hide();
     $(".overlay").hide();
+    $("#player").hide();
 
     $(".thumbnail")
       .hover(function() {
@@ -92,11 +93,11 @@ $( document ).ready(function() {
   */
   function getQueryString(key, default_)
   {
-    if (default_==null) default_="";
+    if (default_===null) default_="";
     key = key.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
     var regex = new RegExp("[\\?&]"+key+"=([^&#]*)");
     var qs = regex.exec(window.location.href);
-    if(qs == null)
+    if(qs === null)
       return default_;
     else
       return qs[1];

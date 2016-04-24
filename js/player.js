@@ -1,4 +1,5 @@
 var MY_USER_ID = "34466551";
+var PREV_TRACK;
 
 // Initialize player
 DZ.init({
@@ -13,18 +14,32 @@ DZ.init({
 
 // Play any track, album or playlist
 function play(id, type) {
+  var currentTrack = DZ.player.getCurrentTrack();
   switch (type) {
     case "track":
-      DZ.player.playTracks([id]);
-      console.log("..Playing " + type + " " + id);
+      if (DZ.player.isPlaying()) {
+        if (currentTrack.id == id) {
+          DZ.player.pause();
+          $("#player").slideUp("fast");
+        } else {
+          DZ.player.playTracks([id]);
+          PREV_TRACK = currentTrack.id;
+        }
+      } else {
+        if (PREV_TRACK == id) {
+          DZ.player.play();
+        } else {
+          DZ.player.playTracks([id]);
+          PREV_TRACK = id;
+        }
+        riot.mount('player');
+      }
       break;
     case "album":
       DZ.player.playAlbum(id);
-      console.log("..Playing " + type + " " + id);
       break;
     case "playlist":
       DZ.player.playTracks(id);
-      console.log("..Playing " + type + " " + id);
       break;
     default:
       console.error("Invalid type or id.");
