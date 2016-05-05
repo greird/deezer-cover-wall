@@ -42,6 +42,7 @@ function setCanvaSize() {
 
 function setAnimations() {
   $(".track-information").hide();
+  $(".controls").hide();
   $(".overlay").hide();
   $("#player").hide();
 
@@ -49,9 +50,11 @@ function setAnimations() {
     .hover(function() {
       $(".overlay", this).fadeTo("fast" , 0.8);
       $(".track-information", this).fadeIn("fast");
+      $(".controls", this).fadeIn("fast");
     }, function() {
       $(".overlay", this).stop().fadeOut("fast");
       $(".track-information", this).stop().fadeOut("fast");
+      $(".controls", this).stop().fadeOut("fast");
   });
 }
 

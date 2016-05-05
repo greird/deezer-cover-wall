@@ -50,7 +50,6 @@ a:hover {
 	height: 250px;
 	float: left;
 	overflow: hidden;
-	cursor: pointer;
 }
 .thumbnail .cover {
 	position: absolute;
@@ -72,7 +71,7 @@ a:hover {
 	background-color: #23232D;
 }
 
-.track-information {
+.track-information, .controls {
 	display: block;
 	position: absolute;
 	z-index: 1000;
@@ -90,6 +89,15 @@ a:hover {
 .track-information h2 em{
 	font-size: 14px;
 	color: #e1e1e1;
+}
+
+.controls {
+	z-index: 2000;
+}
+.controls i {
+	margin-top: 160px;
+	color: #e1e1e1;
+	cursor: pointer;
 }
 
 #player {

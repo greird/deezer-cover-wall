@@ -147,6 +147,19 @@ function play(id, type) {
   }
 }
 
+// Add a given track to the queuelist, right after the currently playing track
+function playNext(trackId) {
+  var queueList = DZ.player.getTrackList();
+  var currentTrackId = parseInt(queueList[0].id);
+  var newTrackList = [trackId];
+
+  for (var i in queueList) {
+    if (queueList[i].id != trackId) newTrackList.push(queueList[i].id);
+  }
+  DZ.player.changeTrackOrder(newTrackList);
+  console.log(trackId + " will play after " + currentTrackId + " in queuelist : " + newTrackList);
+}
+
 // Update player information on status change
 DZ.Event.subscribe('current_track', function(track, evt_name) {
   PLAYER.CURRENT = track;
