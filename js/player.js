@@ -97,6 +97,19 @@ DZ.init({
 function play(id, type) {
 
   var currentTrackId = parseInt(DZ.player.getTrackList()[0].id);
+  var queueList = DZ.player.getTrackList();
+  var newTrackList = [];
+  var saveTracks = false;
+
+  // remove playing track from queuelist and add it to the first position
+  function resetQueuelistAndPlay() {
+    newTrackList.push(id);
+    for (var i in queueList) {
+      if (saveTracks === true) newTrackList.push(queueList[i].id);
+      else if (queueList[i].id == id) saveTracks = true;
+    }
+    DZ.player.playTracks(newTrackList);
+  }
 
   switch (type) {
 
@@ -106,14 +119,14 @@ function play(id, type) {
           DZ.player.pause();
           $("#player").slideUp("fast");
         } else {
-          DZ.player.playTracks([id]);
+          resetQueuelistAndPlay();
         }
       } else {
         if (currentTrackId === id) {
           DZ.player.play();
           $("#player").slideDown("fast");
         } else {
-          DZ.player.playTracks([id]);
+          resetQueuelistAndPlay();
           riot.mount('player');
         }
       }
