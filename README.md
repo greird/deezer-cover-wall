@@ -1,7 +1,5 @@
 # deezer-cover-wall
 
-**Work in progress.**
-
 A cover wall based on Deezer's content.
 
 Display a hundred tracks from a given request.
